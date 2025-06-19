@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Login = () => {
+const Today = () => {
   return (
     <div>
-      
+      Today Page
     </div>
   )
 }
 
-export default Login
+export default Today
