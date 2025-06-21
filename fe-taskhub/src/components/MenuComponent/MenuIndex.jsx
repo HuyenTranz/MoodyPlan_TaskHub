@@ -82,6 +82,41 @@ const MenuIndex = () => {
 
    ];
 
+   const PROJECT_MENU = [
+      {
+         id: 0,
+         name: "All projects",
+      },
+      {
+         id: 1,
+         name: "My projects",
+      },
+      {
+         id: 2,
+         name: "Shared with me",
+      },
+      {
+         id: 4,
+         name: "All projects 1",
+      },
+      {
+         id: 5,
+         name: "My projects 2",
+      },
+      {
+         id: 6,
+         name: "Shared with me 3",
+      },
+      {
+         id: 7,
+         name: "My projects 4",
+      },
+      {
+         id: 8,
+         name: "Shared with me 2",
+      },
+   ];
+
 
    const renderMenuItems = () => {
       return ARRAY_MENU.map((items) => (
@@ -109,6 +144,16 @@ const MenuIndex = () => {
       ));
    };
 
+   const renderProjectMenu = () => {
+      return PROJECT_MENU.map((project) => (
+         <div key={project.id} className="project-item">
+            <NavLink to={`/projects/${project.id}/${project.name}`} className="project-item-link">
+               {project.name}
+            </NavLink>
+         </div>
+      ));
+   }
+
    return (
       <div className="menu-index">
          <div className="menu-content">
@@ -127,6 +172,18 @@ const MenuIndex = () => {
             <div className="menu-items">
                {renderMenuItems()}
             </div >
+            <div className="menu-projects">
+               <div className="menu-heading">
+                  <div className="menu-heading-text">MY PROJECTS</div>
+                  <div className="add-project-btn">
+                     <RiAddLine className="add-icon" />
+                  </div>
+               </div>
+               <div className="project-list">
+                  {renderProjectMenu()}
+               </div>
+            </div>
+
          </div>
          <div className="menu-account">
             <div className="account-avt">
@@ -142,7 +199,6 @@ const MenuIndex = () => {
                   <button className="modal-close-btn" onClick={() => setShowModal(false)}>
                      <AiOutlineClose />
                   </button>
-
                   <BoxAddTask />
                </div>
             </div>
