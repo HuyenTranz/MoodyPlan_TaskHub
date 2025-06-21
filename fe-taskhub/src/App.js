@@ -1,12 +1,11 @@
 import { BrowserRouter, Route } from 'react-router-dom';
 import MainView from './mainLayout/MainView';
-import Router from './routes/Router';
+import './styles/index.scss';
 
 function App() {
   return (
     <BrowserRouter>
       <MainView />
-      <Router/>
     </BrowserRouter>
   );
 }

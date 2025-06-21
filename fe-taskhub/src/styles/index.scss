@@ -1,5 +1,27 @@
+$bg-color: #f4f4f4;            // Màu nền chính của menu, input, dropdown, v.v.
+$hover-bg: #ebebeb;            // Màu nền khi hover
+$active-bg: #ffefe5;         // Màu nền khi active (như item được chọn)
+
+$text-color: #333;             // Màu chữ chính (text input, tiêu đề, v.v.)
+$text-accent: #af2b13;         // Màu chữ nhấn mạnh (như active item, highlight)
+
+$icon-color: #333;             // Màu biểu tượng
+$border-color: #ccc;           // Màu viền (input, dropdown, ...)
+
+$btn-bg: #d44731;              // Màu nền nút chính (nút submit, thêm,...)
+$btn-bg-hover: #af2b13;        // Màu khi hover nút chính
+$btn-text-color: #f4f4f4;      // Màu chữ của nút chính
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
+  margin: 10px;
+  padding: 0px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -11,3 +33,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@import "./App.scss";
+@import "./BoxAddTaskComponentStyle/_boxAddTaskComponent.scss"; 
+@import "./InboxStyle/inbox.scss";

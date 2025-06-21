@@ -1,17 +1,17 @@
 import React from 'react'
 import MenuIndex from '../components/MenuComponent/MenuIndex'
-import { Outlet } from 'react-router-dom'
+import Router from '../routes/Router'
 
 const mainView = () => {
     return (
-        <div>
+        <div className='main-view'>
             <div className='main-menu'>
                 <MenuIndex />
             </div>
             <div className='main-container'>
                 {/* <div className="main-header-container"></div> */}
                 <div className="main-content-container">
-                    <Outlet/>
+                    <Router/>
                 </div>
             </div>
         </div>
