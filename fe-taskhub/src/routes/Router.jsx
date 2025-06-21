@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Today from '../pages/Today'
 import Upcoming from '../pages/Upcoming'
 import StickyWall from '../pages/StickyWall'
@@ -11,8 +11,10 @@ import AllTasks from '../pages/AllTasks'
 import Inbox from '../pages/Inbox'
 
 const Router = () => {
+
+    const location = useLocation();
     return (
-        <Routes>
+        <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Today />} />
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/sticky-wall" element={<StickyWall />} />

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Completed = () => {
     return (
-        <div>
+        <div  className="page-transition">
             Completed
         </div>
     )

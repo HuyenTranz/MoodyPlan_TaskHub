@@ -2,7 +2,7 @@ import React from 'react'
 
 const Today = () => {
   return (
-    <div>
+    <div className="page-transition">
       Today Page
     </div>
   )

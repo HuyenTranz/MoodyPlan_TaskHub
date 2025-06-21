@@ -2,7 +2,7 @@ import React from 'react'
 
 const Upcoming = () => {
   return (
-    <div>
+    <div className="page-transition">
       Upcoming Page
     </div>
   )

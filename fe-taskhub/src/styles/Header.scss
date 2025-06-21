@@ -1,0 +1,84 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px 12px 0 0;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: $text-color;
+      margin: 0;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+    .header-button {
+      padding: 10px 18px;
+      background-color: $btn-bg;
+      color: $btn-text-color;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      
+      &:hover {
+        background-color: $btn-bg-hover;
+      }
+      
+      &:active {
+        transform: scale(0.98);
+      }
+      
+      &.secondary {
+        background-color: $bg-color;
+        color: $text-color;
+        border: 1px solid $border-color;
+        font-weight: 500;
+        
+        &:hover {
+          background-color: $hover-bg;
+        }
+      }
+    }
+
+    .header-icon-button {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background-color: $bg-color;
+      border: 1px solid $border-color;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      
+      svg {
+        font-size: 14px;
+        color: $icon-color;
+      }
+      
+      &:hover {
+        background-color: $hover-bg;
+      }
+    }
+  }
+}

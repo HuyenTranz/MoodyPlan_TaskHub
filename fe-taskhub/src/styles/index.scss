@@ -1,18 +1,32 @@
-$bg-color: #f4f4f4;            // Màu nền chính của menu, input, dropdown, v.v.
-$hover-bg: #ebebeb;            // Màu nền khi hover
-$active-bg: #ffefe5;         // Màu nền khi active (như item được chọn)
+$bg-color: #f4f4f4; // Màu nền chính của menu, input, dropdown, v.v.
+$hover-bg: #ebebeb; // Màu nền khi hover
+$active-bg: #ffefe5; // Màu nền khi active (như item được chọn)
 
-$text-color: #333;             // Màu chữ chính (text input, tiêu đề, v.v.)
-$text-accent: #af2b13;         // Màu chữ nhấn mạnh (như active item, highlight)
+$text-color: #333; // Màu chữ chính (text input, tiêu đề, v.v.)
+$text-accent: #af2b13; // Màu chữ nhấn mạnh (như active item, highlight)
 
-$icon-color: #333;             // Màu biểu tượng
-$border-color: #ccc;           // Màu viền (input, dropdown, ...)
+$icon-color: #333; // Màu biểu tượng
+$border-color: #ccc; // Màu viền (input, dropdown, ...)
 
-$btn-bg: #d44731;              // Màu nền nút chính (nút submit, thêm,...)
-$btn-bg-hover: #af2b13;        // Màu khi hover nút chính
-$btn-text-color: #f4f4f4;      // Màu chữ của nút chính
+$btn-bg: #d44731; // Màu nền nút chính (nút submit, thêm,...)
+$btn-bg-hover: #af2b13; // Màu khi hover nút chính
+$btn-text-color: #f4f4f4; // Màu chữ của nút chính
 
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: slide-up 0.2s ease-out forwards;
+}
 
 
 * {
@@ -34,6 +48,14 @@ code {
     monospace;
 }
 
+.main-content-container {
+  padding: 0px 10px;
+  >div {
+    animation: slide-up 0.2s ease-out forwards;
+  }
+}
+
 @import "./App.scss";
-@import "./BoxAddTaskComponentStyle/_boxAddTaskComponent.scss"; 
+@import "./BoxAddTaskComponentStyle/_boxAddTaskComponent.scss";
 @import "./InboxStyle/inbox.scss";
+@import "./Header.scss";
