@@ -11,6 +11,7 @@ import { RiAddLine } from "react-icons/ri";
 import { SiTicktick } from "react-icons/si";
 import { FaInbox } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { BsInboxesFill } from "react-icons/bs";
 import BoxAddTask from "../BoxAddTaskComponent/BoxAddTask";
 
 const MenuIndex = () => {
@@ -148,7 +149,12 @@ const MenuIndex = () => {
       return PROJECT_MENU.map((project) => (
          <div key={project.id} className="project-item">
             <NavLink to={`/projects/${project.id}/${project.name}`} className="project-item-link">
-               {project.name}
+               <div className="project-item-icon">
+                  <BsInboxesFill />
+               </div>
+               <div className="project-item-text">
+                  {project.name}
+               </div>
             </NavLink>
          </div>
       ));

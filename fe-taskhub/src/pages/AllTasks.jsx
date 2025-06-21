@@ -5,8 +5,8 @@ import Header from '../components/HeaderComponent/HeaderComponent';
 
 const AllTasks = () => {
     return (
-        <div  className="page-transition">
-           
+        <div className="page-transition">
+
             <Header title="All Tasks">
                 <div className="header-icon-button">
                     <FaFilter />

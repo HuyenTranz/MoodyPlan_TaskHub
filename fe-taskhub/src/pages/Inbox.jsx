@@ -7,15 +7,15 @@ const Inbox = () => {
     return (
         <div className="inbox-container page-transition">
             <Header title="Inbox">
-                <div className="view-switcher" style={{ display: 'flex', gap: '0.5rem' }}>
+                {/* <div className="view-switcher" style={{ display: 'flex', gap: '0.5rem' }}>
                     <button className="header-button secondary">
                         <FaCalendarAlt style={{ marginRight: '5px' }} /> Month
                     </button>
                     <button className="header-button secondary">
                         <FaListUl style={{ marginRight: '5px' }} /> Week
                     </button>
-                </div>
-                <button className="header-button">Create Event</button>
+                </div> */}
+                <button className="header-button">Create Section</button>
             </Header>
 
             <BoxAddTask />

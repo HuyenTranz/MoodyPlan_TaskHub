@@ -11,6 +11,8 @@ import {
 
 import { RiArrowDownSLine } from 'react-icons/ri';  // Icon mũi tên xuống
 import { FiCalendar } from 'react-icons/fi';        // Icon lịch
+import DateSelectorDay from '../DateSelectorDay';
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const BoxAddTask = () => {
     // Danh sách các project và section tương ứng
@@ -69,9 +71,7 @@ const BoxAddTask = () => {
 
             {/* Các tuỳ chọn kèm theo task (ví dụ: chọn ngày) */}
             <div className="task-options">
-                <button className="option-date-btn">
-                    <FiCalendar /> Date
-                </button>
+                <DateSelectorDay />
             </div>
 
             <div className="task-footer">
@@ -83,10 +83,11 @@ const BoxAddTask = () => {
                         onClick={() => setShowDropdown(prev => !prev)}
                         {...getReferenceProps()}
                     >
-                        <button className="task-dropdown-name">
+                        <button className="header-button secondary">
                             {selectedProject.name} / {selectedSection}
+                            <IoMdArrowDropdown className="header-icon-button" />
                         </button>
-                        <RiArrowDownSLine className="arrow-icon" />
+
                     </div>
 
                     {/* Dropdown menu hiển thị khi showDropdown = true */}
@@ -121,8 +122,8 @@ const BoxAddTask = () => {
 
                 {/* Các nút hành động */}
                 <div className="task-actions">
-                    <button className="cancel-btn">Cancel</button>
-                    <button className="add-btn">Add task</button>
+                    <button className="header-button secondary">Cancel</button>
+                    <button className="header-button">Add task</button>
                 </div>
             </div>
         </div>
