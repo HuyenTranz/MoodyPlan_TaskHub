@@ -1,24 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
-const DateSelectorMonth = () => {
-    const [selectedMonth, setSelectedMonth] = useState(new Date());
-    const [isOpen, setIsOpen] = useState(false);
-    const wrapperRef = useRef(null); // ref để xử lý click bên ngoài
-
-    const handleChange = (date) => {
-        setSelectedMonth(date);
-        setIsOpen(false); // Đóng khi chọn xong
-    };
+const DateSelectorMonth = ({ selectedMonth, onChange }) => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const wrapperRef = useRef(null);
 
     const handleClick = (e) => {
         e.preventDefault();
         setIsOpen(!isOpen);
     };
 
-    // Đóng DatePicker nếu click ra ngoài
+    const handleChange = (date) => {
+        onChange(date); // truyền ra ngoài
+        setIsOpen(false);
+    };
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -33,10 +31,7 @@ const DateSelectorMonth = () => {
     }, []);
 
     return (
-        <div
-            ref={wrapperRef}
-            style={{ position: "relative", display: "inline-block" }}
-        >
+        <div ref={wrapperRef} style={{ position: "relative", display: "inline-block" }}>
             <button className="header-button secondary" onClick={handleClick}>
                 {format(selectedMonth, "MM-yyyy")}
             </button>
