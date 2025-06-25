@@ -1,50 +1,28 @@
 const mongoose = require("mongoose");
 
-const ProjectShema = (
+const ProjectSchema = new mongoose.Schema(
     {
-        projectId: {
-            type: mongoose.Schema.Types.ObjectId,
-            auto: true,
-        },
         ownerId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            require: true,
+            required: true,
         },
         name: {
             type: String,
-            require: true,
+            required: true,
         },
         color: {
             type: String,
-            require: true,
+            required: true,
         },
         isDefault: {
             type: Boolean,
-            default: null
+            default: false, // thường default là false, chỉ Inbox mới true
         },
-        deletedAt: {
-            type: Date,
-            default: null
-        },
-        members: [
-            {
-                userId: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "User",
-                    require: true,
-                },
-                role: {
-                    type: String,
-                    enum: ["owner", "editor", "viewer"],
-                    default: "editor"
-                }
-            }
-        ]
     },
     { timestamps: true }
-)
+);
 
-const ProjectModel = mongoose.model("Project", ProjectShema);
+const ProjectModel = mongoose.model("Project", ProjectSchema);
 
 module.exports = ProjectModel;

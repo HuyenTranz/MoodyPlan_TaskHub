@@ -5,51 +5,33 @@ const TaskSchema = (
         sectionId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Section",
-            required: true,
+            required: true
         },
         title: {
             type: String,
-            require: true
+            required: true
         },
         description: {
-            type: String,
-            require: false
+            type: String
         },
         dueDate: {
-            type: Date,
-            require: false,
+            type: Date
         },
-        isCompleted: {
+        status: {
+            type: String,
+            enum: ["in_progress", "completed", "deleted"],
+            default: "in_progress"
+        },
+        repeat: {
+            type: String,
+            enum: ["none", "daily", "weekly", "monthly", "yearly"],
+            default: "none"
+        },
+        isImportant: {
             type: Boolean,
-            default: false,
-        },
-        deletedAt: {
-            type: Date,
-            default: null,
-        },
-        attachments: [
-            {
-                fileName: {
-                    type: String,
-                    require: true
-                },
-                fileType: {
-                    type: String,
-                    required: true,
-                },
-                fileUrl: {
-                    type: String,
-                    required: true,
-                },
-                uploadedAt: {
-                    type: Date,
-                    default: Date.now
-                }
-            }
-        ]
-    },
-    { timestamps: true }
-)
+            default: false
+        }
+    }, { timestamps: true });
 
 const TaskModel = mongoose.model("Task", TaskSchema);
 
