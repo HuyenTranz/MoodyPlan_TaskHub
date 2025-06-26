@@ -19,7 +19,7 @@ const Router = () => {
             <Route path="/upcoming" element={<Upcoming />} />
             <Route path="/sticky-wall" element={<StickyWall />} />
             <Route path="/calendar" element={<Calendar />} />
-            <Route path='/login ' element={<Login />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path="/completed" element={<Completed />} />
             <Route path="/all-tasks" element={<AllTasks />} />
