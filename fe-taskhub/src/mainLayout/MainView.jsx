@@ -2,7 +2,7 @@ import React from 'react'
 import MenuIndex from '../components/MenuComponent/MenuIndex'
 import Router from '../routes/Router'
 
-const mainView = () => {
+const MainView = () => {
     return (
         <div className='main-view'>
             <div className='main-menu'>
@@ -18,4 +18,4 @@ const mainView = () => {
     )
 }
 
-export default mainView
+export default MainView

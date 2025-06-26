@@ -7,34 +7,13 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 7px;
 
-    .task-title {
-        border: none;
-        outline: none;
-        font-size: 18px;
-        font-weight: bold;
-        color: $text-color;
+    .input {
+        @extend .input;
         width: 100%;
-        padding: 4px 0;
-
-        &::placeholder {
-            color: lighten($text-color, 30%);
-            font-weight: bold;
-        }
-    }
-
-    .task-description {
-        border: none;
-        outline: none;
-        font-size: 14px;
-        color: $text-color;
-        width: 100%;
-        padding: 2px 0;
-
-        &::placeholder {
-            color: lighten($text-color, 30%);
-        }
+        padding: 12px;
+        font-size: 16px;
     }
 
     .task-options {

@@ -13,7 +13,6 @@ const ProjectSchema = new mongoose.Schema(
         },
         color: {
             type: String,
-            required: true,
         },
         isDefault: {
             type: Boolean,

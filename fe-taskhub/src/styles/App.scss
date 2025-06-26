@@ -1,11 +1,18 @@
 .main-view {
+    height: 100vh;
     display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // background-image: url("../assets/img/bg.png");
+    // background-size: cover;
+    // background-position: center;
+    // background-repeat: no-repeat;
+    // animation: slide-up 0.2s ease-out forwards;
 
     .main-menu {
         width: 300px;
-        height: calc(100vh - 20px);
+        height: 100vh;
         background-color: $bg-color;
-        border-radius: 10px;
 
         .menu-index {
             padding: 20px;

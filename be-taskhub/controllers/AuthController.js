@@ -1,4 +1,5 @@
 const UserModel = require("../models/UserModel")
+const ProjectModel = require("../models/ProjectModel")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -37,17 +38,28 @@ const registerUser = async (req, res) => {
         })
 
         // Lưu người dùng mới vào MongoDB
-        await user.save();
-        res.status(201).json({
-            success: true,
-            message: "Đăng kí thành công!",
-            user: {
-                email,
-                name,
-                avatar,
-            }
-        })
+        const saveUser = await user.save();
+        if (saveUser) {
+            const project = new ProjectModel({
+                ownerId: user._id,
+                name: "Inbox",
+                color: "#f4f4f4",
+                isDefault: true
+            })
 
+            await project.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Đăng kí thành công!",
+                user: {
+                    email,
+                    name,
+                    avatar,
+                },
+                project: project
+            })
+        }
     } catch (error) {
         console.log("Lỗi đăng ký!", error)
         return res.status(500).json({

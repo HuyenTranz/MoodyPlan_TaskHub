@@ -8,9 +8,6 @@ import {
     useDismiss,        // Middleware: tự động đóng dropdown khi click ra ngoài
     useInteractions    // Hook để gom các hành vi tương tác (dismiss, hover, v.v.)
 } from '@floating-ui/react';
-
-import { RiArrowDownSLine } from 'react-icons/ri';  // Icon mũi tên xuống
-import { FiCalendar } from 'react-icons/fi';        // Icon lịch
 import DateSelectorDay from '../DateSelector/DateSelectorDay'
 import { IoMdArrowDropdown } from "react-icons/io";
 
@@ -63,11 +60,24 @@ const BoxAddTask = () => {
 
     return (
         <div className="add-task-card">
-            {/* Input tiêu đề task */}
-            <input type="text" placeholder="Submit" className="task-title" />
+            <div className="form-group">
+                <label className="label">Tiêu đề</label>
+                <input
+                    type="text"
+                    placeholder="Nhập tiêu đề"
+                    className="input"
+                    required
+                />
+            </div>
 
-            {/* Input mô tả task */}
-            <input type="text" placeholder="Description" className="task-description" />
+            <div className="form-group">
+                <label className="label">Mô tả</label>
+                <input
+                    type="text"
+                    placeholder="Nhập mô tả"
+                    className="input"
+                />
+            </div>
 
             {/* Các tuỳ chọn kèm theo task (ví dụ: chọn ngày) */}
             <div className="task-options">

@@ -41,7 +41,7 @@ const DateSelectorDay = () => {
                 {format(selectedDate, "dd-MM-yyyy")}
             </button>
             {isOpen && (
-                <div style={{ position: "absolute", zIndex: 10, right: 0 }}>
+                <div style={{ position: "absolute", zIndex: 10, left: 0 }}>
                     <DatePicker
                         selected={selectedDate}
                         onChange={handleChange}
