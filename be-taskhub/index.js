@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 const AuthRouter = require('./routes/AuthRouter')
+const UserRouter = require('./routes/UserRouter')
 
 const app = express();
 dotenv.config();
@@ -22,4 +23,5 @@ mongoose
         console.log(error)
     })
 
-app.use("/auth", AuthRouter)
+app.use("/api/auth", AuthRouter)
+app.use("/api/user", UserRouter)

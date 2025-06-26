@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
             email,
             password: hashPassword,
             name,
-            avatar: avatar || "https://i.pinimg.com/736x/1a/6c/61/1a6c6151ed8647bbc13671d3f2f4b579.jpg",
+            avatar: avatar || process.env.DEFAULT_AVT_URL,
         })
 
         // Lưu người dùng mới vào MongoDB
@@ -49,7 +49,7 @@ const registerUser = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("Đăng kí không thành công!", error)
+        console.log("Lỗi đăng ký!", error)
         return res.status(500).json({
             success: false,
             message: "Đã xảy ra lỗi máy chủ!",
@@ -93,14 +93,14 @@ const loginUser = async (req, res) => {
 
         // Tạo token (JWT)
         const accessToken = jwt.sign(
-            { userID: user._id },
+            { _id: user._id },
             process.env.JWT_ACCESS_SECRET,
             { expiresIn: process.env.JWT_ACCESS_EXPIRES_IN }
         );
 
         // Tạo refresh token 
         const refreshToken = jwt.sign(
-            { userID: user._id },
+            { _id: user._id },
             process.env.JWT_REFRESH_SECRET,
             { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN }
         );
@@ -108,7 +108,7 @@ const loginUser = async (req, res) => {
         // Trả về token và thông tin cơ bản của user
         res.status(200).json({
             success: true,
-            message: "Đăng nhập thành công",
+            message: "Đăng nhập thành công!",
             accessToken,
             refreshToken,
             user: {
@@ -120,7 +120,7 @@ const loginUser = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("Đăng nhập không thành công", error);
+        console.log("Lỗi đăng nhập!", error);
         return res.status(500).json({
             success: false,
             message: "Đã xảy ra lỗi máy chủ!",

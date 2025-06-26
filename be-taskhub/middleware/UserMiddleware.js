@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const UserMiddleware = (req, res, next) => {
+const userMiddleware = (req, res, next) => {
     try {
         // Lấy token từ header "Authorization" theo định dạng: "Bearer <token>"
         const token = req.header("Authorization")?.split(" ")[1];
@@ -34,4 +34,4 @@ const UserMiddleware = (req, res, next) => {
     }
 }
 
-module.exports = UserMiddleware;
+module.exports = {userMiddleware};
