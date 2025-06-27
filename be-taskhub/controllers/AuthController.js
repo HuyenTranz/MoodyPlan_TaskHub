@@ -1,55 +1,62 @@
-const UserModel = require("../models/UserModel")
-const ProjectModel = require("../models/ProjectModel")
+const UserModel = require("../models/UserModel");
+const ProjectModel = require("../models/ProjectModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+/**
+ * @desc Đăng ký người dùng mới
+ * @route POST /api/auth/register
+ * @access Public
+ */
 const registerUser = async (req, res) => {
     try {
         const { email, password, name, avatar } = req.body;
+        console.log("registerUser: ", req.body);
 
-        console.log("registerUser: ", req.body)
-
-        // Kiểm tra đầu vào
+        // 1. Kiểm tra dữ liệu đầu vào
         if (!email || !password || !name) {
             return res.status(400).json({
                 status: false,
-                message: "Vui lòng nhập đầy đủ email và mật khẩu và tên người dùng!"
-            })
+                message: "Vui lòng nhập đầy đủ email, mật khẩu và tên người dùng!"
+            });
         }
 
-        // Kiểm tra xem email đã tồn tại trong hệ thống chưa
+        // 2. Kiểm tra email đã tồn tại
         const checkUser = await UserModel.findOne({ email });
         if (checkUser) {
             return res.status(201).json({
                 success: false,
                 message: "Email đã tồn tại!"
-            })
+            });
         }
 
-        // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-        const hashPassword = await bcrypt.hash(password, 8)
+        // 3. Mã hóa mật khẩu
+        const hashPassword = await bcrypt.hash(password, 8);
 
-        // Tạo mới người dùng với dữ liệu đã được xử lý
+        // 4. Tạo user mới
         const user = new UserModel({
             email,
             password: hashPassword,
             name,
             avatar: avatar || process.env.DEFAULT_AVT_URL,
-        })
+        });
 
-        // Lưu người dùng mới vào MongoDB
+        // 5. Lưu user vào DB
         const saveUser = await user.save();
+
         if (saveUser) {
+            // 6. Tạo project Inbox mặc định cho user
             const project = new ProjectModel({
                 ownerId: user._id,
                 name: "Inbox",
                 color: "#f4f4f4",
                 isDefault: true
-            })
+            });
 
             await project.save();
 
-            res.status(201).json({
+            // 7. Trả kết quả về client
+            return res.status(201).json({
                 success: true,
                 message: "Đăng kí thành công!",
                 user: {
@@ -57,68 +64,72 @@ const registerUser = async (req, res) => {
                     name,
                     avatar,
                 },
-                project: project
-            })
+                project
+            });
         }
+
     } catch (error) {
-        console.log("Lỗi đăng ký!", error)
+        console.log("Lỗi đăng ký!", error);
         return res.status(500).json({
             success: false,
             message: "Đã xảy ra lỗi máy chủ!",
-            error: error
-        })
+            error
+        });
     }
-}
+};
 
-
+/**
+ * @desc Đăng nhập người dùng
+ * @route POST /api/auth/login
+ * @access Public
+ */
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-
         console.log("loginUser: ", req.body);
 
-        // Kiểm tra đầu vào
+        // 1. Kiểm tra đầu vào
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
                 message: "Vui lòng nhập đầy đủ email và mật khẩu!"
-            })
+            });
         }
 
-        // Tìm người dùng theo email
+        // 2. Tìm người dùng theo email
         const user = await UserModel.findOne({ email });
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "Người dùng không tồn tại!"
-            })
+            });
         }
 
-        // So sánh mật khẩu người dùng nhập với mật khẩu đã hash
+        // 3. So sánh mật khẩu
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({
                 success: false,
                 message: "Mật khẩu không chính xác!"
-            })
+            });
         }
 
-        // Tạo token (JWT)
+        // 4. Tạo access token
         const accessToken = jwt.sign(
             { _id: user._id },
             process.env.JWT_ACCESS_SECRET,
             { expiresIn: process.env.JWT_ACCESS_EXPIRES_IN }
         );
 
-        // Tạo refresh token 
+        // 5. Tạo refresh token
         const refreshToken = jwt.sign(
             { _id: user._id },
             process.env.JWT_REFRESH_SECRET,
             { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN }
         );
 
-        // Trả về token và thông tin cơ bản của user
-        res.status(200).json({
+        // 6. Trả về thông tin người dùng và token
+        return res.status(200).json({
             success: true,
             message: "Đăng nhập thành công!",
             accessToken,
@@ -129,17 +140,43 @@ const loginUser = async (req, res) => {
                 name: user.name,
                 avatar: user.avatar
             }
-        })
+        });
 
     } catch (error) {
         console.log("Lỗi đăng nhập!", error);
         return res.status(500).json({
             success: false,
             message: "Đã xảy ra lỗi máy chủ!",
-            error: error
-        })
+            error
+        });
     }
+};
 
-}
+/**
+ * @desc    Đăng xuất người dùng
+ * @route   POST /api/auth/logout
+ * @access  Public (hoặc Protected nếu kiểm tra token)
+ */
+const logoutUser = async (req, res) => {
+    try {
+        // Nếu dùng localStorage ở FE thì chỉ cần trả status OK
+        return res.status(200).json({
+            success: true,
+            message: "Đăng xuất thành công!"
+        });
 
-module.exports = { registerUser, loginUser }
+    } catch (error) {
+        console.log("Lỗi đăng xuất!", error);
+        return res.status(500).json({
+            success: false,
+            message: "Đã xảy ra lỗi máy chủ!",
+            error
+        });
+    }
+};
+
+module.exports = {
+    registerUser,
+    loginUser,
+    logoutUser
+};

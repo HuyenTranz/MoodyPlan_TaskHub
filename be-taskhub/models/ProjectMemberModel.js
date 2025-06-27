@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const ProjectMemberSchema = (
+const ProjectMemberSchema = new mongoose.Schema(
     {
         projectId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Project", 
+            ref: "Project",
             required: true
         },
         userId: {
@@ -21,7 +21,9 @@ const ProjectMemberSchema = (
             type: Date,
             default: Date.now
         }
-    }, { timestamps: false });
+    },
+    { timestamps: true }
+);
 
 
 const ProjectMemberModel = mongoose.model("ProjectMember", ProjectMemberSchema);
