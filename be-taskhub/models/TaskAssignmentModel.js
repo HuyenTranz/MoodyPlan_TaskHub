@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const TaskAssignmentSchema = (
+const TaskAssignmentSchema = new mongoose.Schema(
     {
         taskId: {
             type: mongoose.Schema.Types.ObjectId,

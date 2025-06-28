@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const SectionShema = (
+const SectionShema = new mongoose.Schema(
     {
         projectId: {
             type: mongoose.Schema.Types.ObjectId,

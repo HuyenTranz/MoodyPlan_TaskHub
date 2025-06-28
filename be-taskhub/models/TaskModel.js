@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const TaskSchema = (
+const TaskSchema = new mongoose.Schema(
     {
         sectionId: {
             type: mongoose.Schema.Types.ObjectId,
